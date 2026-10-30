@@ -1,0 +1,225 @@
+.dashboard-transition-source {
+  visibility: hidden !important;
+
+  opacity: 0 !important;
+
+  pointer-events: none !important;
+
+  transform: none !important;
+
+  animation: none !important;
+}
+
+.physical-transition-root {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: visible;
+
+  pointer-events: none;
+
+  /*
+   * Strong perspective.
+   *
+   * This makes the doors look
+   * like they are opening into
+   * the physical space behind
+   * the display.
+   */
+  perspective: 1450px;
+
+  perspective-origin:
+    50% 50%;
+
+  transform-style:
+    preserve-3d;
+
+  /*
+   * Below the thinking indicator.
+   */
+  z-index: 1000;
+
+  user-select: none;
+}
+
+.physical-door {
+  position: absolute;
+
+  top: 0;
+
+  height: 100vh;
+
+  overflow: hidden;
+
+  transform-style:
+    preserve-3d;
+
+  /*
+   * IMPORTANT:
+   *
+   * We keep the backside available
+   * because the door is allowed to
+   * pass beyond 90 degrees.
+   */
+  backface-visibility:
+    visible;
+
+  will-change:
+    transform;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  contain: paint;
+}
+
+/*
+ * LEFT HINGE
+ *
+ * Exact screen edge.
+ */
+.physical-door-left {
+  left: 0;
+
+  transform-origin:
+    0% 50%;
+
+  box-shadow:
+    14px 0 48px
+    rgba(0, 0, 0, 0.52);
+}
+
+/*
+ * RIGHT HINGE
+ *
+ * Exact screen edge.
+ */
+.physical-door-right {
+  transform-origin:
+    100% 50%;
+
+  box-shadow:
+    -14px 0 48px
+    rgba(0, 0, 0, 0.52);
+}
+
+/*
+ * Dashboard visual inside
+ * the physical doors.
+ */
+.physical-door > .dashboard {
+  position: absolute !important;
+
+  top: 0 !important;
+
+  margin: 0 !important;
+
+  transform:
+    none !important;
+
+  animation:
+    none !important;
+
+  visibility:
+    visible !important;
+
+  opacity:
+    1 !important;
+
+  pointer-events:
+    none !important;
+
+  backface-visibility:
+    visible !important;
+}
+
+/*
+ * INNER EDGE OF LEFT DOOR
+ */
+.physical-door-left::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  pointer-events: none;
+
+  background:
+    rgba(255, 255, 255, 0.16);
+
+  box-shadow:
+    0 0 12px
+    rgba(255, 255, 255, 0.08);
+}
+
+/*
+ * INNER EDGE OF RIGHT DOOR
+ */
+.physical-door-right::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  pointer-events: none;
+
+  background:
+    rgba(255, 255, 255, 0.16);
+
+  box-shadow:
+    0 0 12px
+    rgba(255, 255, 255, 0.08);
+}
+
+/*
+ * Very subtle portal illumination.
+ */
+.physical-portal-glow {
+  position: fixed;
+
+  left: 50%;
+  top: 50%;
+
+  width: 48vw;
+  height: 78vh;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.01) 30%,
+      transparent 70%
+    );
+
+  filter:
+    blur(18px);
+
+  will-change:
+    opacity;
+}
